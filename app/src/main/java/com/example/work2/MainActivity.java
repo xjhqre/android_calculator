@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Button ac; //清除
     TextView result; // 显示结果
     TextView record; // 显示记录
+    String record_string; // String类型的运算步骤
 
     ArrayList<String> operatorStack = new ArrayList<>();
     ArrayList<Double> operandStack = new ArrayList<>();
@@ -106,85 +107,85 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {                //switch循环获取点击按钮后的值
                 case R.id.btn_0:                //获取，0-9、小数点，并在编辑框显示
-                    String myString = record.getText().toString();
-                    myString += "0";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "0";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_1:
-                    myString = record.getText().toString();
-                    myString += "1";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "1";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_2:
-                    myString = record.getText().toString();
-                    myString += "2";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "2";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_3:
-                    myString = record.getText().toString();
-                    myString += "3";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "3";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_4:
-                    myString = record.getText().toString();
-                    myString += "4";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "4";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_5:
-                    myString = record.getText().toString();
-                    myString += "5";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "5";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_6:
-                    myString = record.getText().toString();
-                    myString += "6";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "6";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_7:
-                    myString = record.getText().toString();
-                    myString += "7";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "7";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_8:
-                    myString = record.getText().toString();
-                    myString += "8";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "8";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_9:
-                    myString = record.getText().toString();
-                    myString += "9";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "9";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_dot:
-                    myString = record.getText().toString();
-                    myString += ".";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += ".";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_add:             //判断，使用加减乘除的操作符
-                    myString = record.getText().toString();
-                    myString += "+";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "+";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_sub:
-                    myString = record.getText().toString();
-                    myString += "-";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "-";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_mul:
-                    myString = record.getText().toString();
-                    myString += "×";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "×";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_div:
-                    myString = record.getText().toString();
-                    myString += "÷";
-                    record.setText(myString);
+                    record_string = record.getText().toString();
+                    record_string += "÷";
+                    record.setText(record_string);
                     break;
                 case R.id.btn_delete:
-                    myString = record.getText().toString();
-                    if (myString.length() > 0) {
-                        myString = myString.substring(0, myString.length() - 1);
-                        record.setText(myString);
+                    record_string = record.getText().toString();
+                    if (record_string.length() > 0) {
+                        record_string = record_string.substring(0, record_string.length() - 1);
+                        record.setText(record_string);
                     }
                     break;
                 case R.id.btn_clear:                 //清除，将编辑框文本显示为空
@@ -197,19 +198,19 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_equ:                   //计算，以操作符为判断，选择所需的运算，并将结果输出
                     if ("错误".equals(result.getText().toString())) return;
-                    myString = record.getText().toString();
-                    if ("".equals(myString)) return;
+                    record_string = record.getText().toString();
+                    if ("".equals(record_string)) return;
 
                     // 遍历运算记录，调整运算优先级，使运算记录中只剩下加减操作
-                    for (int i = 0; i < myString.length(); i++) {
-                        String operator = String.valueOf(myString.charAt(i));
+                    for (int i = 0; i < record_string.length(); i++) {
+                        String operator = String.valueOf(record_string.charAt(i));
                         // 如果遍历到运算符
                         if (operatorList.contains(operator)) {
 
                             // 插入新的操作数
                             nextOperatorSubscript = i;
                             try {
-                                operandStack.add(Double.parseDouble(myString.substring(previousOperatorSubscript, nextOperatorSubscript)));
+                                operandStack.add(Double.parseDouble(record_string.substring(previousOperatorSubscript, nextOperatorSubscript)));
                             } catch (Exception e) {
                                 result.setText("错误");
                                 return;
@@ -246,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                         } else if (i == record.length() - 1) {
                             // 如果遍历到末尾，添加最后一个操作数
                             try {
-                                operandStack.add(Double.parseDouble(myString.substring(previousOperatorSubscript, record.length())));
+                                operandStack.add(Double.parseDouble(record_string.substring(previousOperatorSubscript, record.length())));
                             } catch (Exception e) {
                                 result.setText("错误");
                                 return;
